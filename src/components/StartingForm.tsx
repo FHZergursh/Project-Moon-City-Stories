@@ -21,7 +21,7 @@ const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
       const randGender = selectRandomGender();
       setGender(randGender)
 
-      if (name === "") //done here because state won't update immedaitely in time
+      if (name === "") //done here because state won't update immedaitely in time, leads to small repetition later but that's fine
       {
         console.log("current gender is ", )
         if (randGender === "male")
@@ -42,11 +42,25 @@ const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
       }
     }
 
-
-
-
-
-
+    if (name === "") //gender is present, name is not
+    {
+    console.log("current gender is ", )
+      if (gender === "male")
+      {
+        console.log("running man")
+        setName(generateRandomNameMale())
+      }
+      else if (gender === "female")
+      {
+        console.log("running fem")
+        setName(generateRandomNameFemale())
+      }
+      else 
+      {
+        console.log("running nb")
+        setName(generateRandomNameNonBinary())
+      }
+    }
 
     if (trait === "")
     {
