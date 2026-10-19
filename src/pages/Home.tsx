@@ -4,9 +4,10 @@ import StartingForm from '../components/StartingForm'
 
 type HomeProps = {
   setTestFunction: (message: string) => void
+  setCharacterCreateCallback: (name: string, gender: string, trait: string) => void
 }
 
-const Home = ({setTestFunction} : HomeProps) => {
+const Home = ({setTestFunction, setCharacterCreateCallback} : HomeProps) => {
 
 
   const nav = useNavigate()
@@ -25,7 +26,7 @@ const Home = ({setTestFunction} : HomeProps) => {
       <span className='text-red-300'>Tailwind test</span>
       <button onClick={handleClick}>Click to move pages</button>
 
-      <StartingForm />
+      <StartingForm setCharacterCreateCallback = {setCharacterCreateCallback}/>
     </div>
     
   )

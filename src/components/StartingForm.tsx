@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const StartingForm = () => {
+type formProps = {
+  setCharacterCreateCallback: (name: string, gender: string, trait: string) => void
+}
+
+const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
+  const [name, setName] = useState("rand")
+  const [gender, setGender] = useState("rand")
+  const [trait, setTrait] = useState("none")
+
+
+
+  function handleSubmit() {
+    console.log(name)
+    console.log(gender)
+    console.log(trait)
+
+  }
+
+
   return (
     <div className='flex justify-center items-center my-10 text-xl'>
-      <form className='flex flex-col gap-5 items-start justify-center p-10 bg-zinc-800'>
+      <form className='flex flex-col gap-5 items-start justify-center p-10 bg-zinc-800' onSubmit={handleSubmit}>
         <label>
           Name: <input className='bg-zinc-700' name="nameInput" />
         </label>
