@@ -1,12 +1,22 @@
 import React from 'react'
+import type { characterCreate } from '../types/characterCreate'
 
 type GameProps = {
-  propTest : string
+  characterCreate: characterCreate
+  
+
 }
 
-const Game = ({propTest = "default"} : GameProps) => {
+const Game = ({characterCreate} : GameProps) => {
   return (
-    <div>Routing, proptest is {propTest}</div>
+    <div className='flex flex-col'>
+      <div>name is: {characterCreate.name}</div>
+      <div>gender is: {characterCreate.gender}</div>
+      <div>trait is: {characterCreate.trait}</div>
+
+
+    </div>
+    
   )
 }
 

@@ -6,12 +6,7 @@ import Results from './pages/Results.tsx'
 import { type characterCreate } from './types/characterCreate.ts'
 
 const App = () => {
-  const [test, setTest] = useState("")
   const [characterCreate, setCharacterCreate] = useState<characterCreate>({name: "rand", gender: "rand", trait: "rand"}) //miiiiight just fold it into a bigger character class if it makes more sense later
-
-  function setTestFunction() {
-    setTest("callback working")
-  }
 
   function setCharacterCreateCallback(name : string, gender : string, trait : string) {
     setCharacterCreate({name, gender, trait})
@@ -21,8 +16,8 @@ const App = () => {
   return (
     <div> 
       <Routes> 
-        <Route path="/" element={<Home setTestFunction={setTestFunction} setCharacterCreateCallback={setCharacterCreateCallback}/>} />
-        <Route path="/game" element={<Game propTest={test}/>} />
+        <Route path="/" element={<Home setCharacterCreateCallback={setCharacterCreateCallback}/>} />
+        <Route path="/game" element={<Game characterCreate={characterCreate}/>} />
         <Route path="results" element={<Results />} />
       </Routes>
     
