@@ -1,4 +1,3 @@
-import React from 'react'
 import type { characterCreate } from '../types/characterCreate'
 
 type GameProps = {
