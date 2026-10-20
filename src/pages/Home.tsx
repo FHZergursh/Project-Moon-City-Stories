@@ -3,17 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import StartingForm from '../components/StartingForm'
 
 type HomeProps = {
-  setTestFunction: (message: string) => void
   setCharacterCreateCallback: (name: string, gender: string, trait: string) => void
 }
 
-const Home = ({setTestFunction, setCharacterCreateCallback} : HomeProps) => {
+const Home = ({setCharacterCreateCallback} : HomeProps) => {
 
 
   const nav = useNavigate()
 
   function handleClick() {
-    setTestFunction("nav working")
 
 
     nav("/game")
