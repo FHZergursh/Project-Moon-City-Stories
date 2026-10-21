@@ -1,4 +1,4 @@
-import { useEffect, useState, type SubmitEvent } from 'react'
+import { useState, type SubmitEvent } from 'react'
 import { selectRandomGender } from '../functions/randomGender'
 import { generateRandomNameFemale, generateRandomNameMale, generateRandomNameNonBinary } from '../functions/randomName'
 import { useNavigate } from 'react-router-dom'
@@ -11,78 +11,49 @@ const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
   const [name, setName] = useState("")
   const [gender, setGender] = useState("")
   const [trait, setTrait] = useState("")
-  const [submit, setSubmit] = useState(false)
   const nav = useNavigate()
 
 
 
   async function handleSubmit(e : SubmitEvent) {
     e.preventDefault()
+    let nameVar = name
+    let genderVar = gender
+    let traitVar = trait
 
-    function generateCharacter() {
     if (gender === "")
     {
-      const randGender = selectRandomGender();
-      setGender(randGender)
-
-      if (name === "") //done here because state won't update immedaitely in time, leads to small repetition later but that's fine
-      {
-        console.log("current gender is ", randGender)
-        if (randGender === "male")
-        {
-          console.log("running man")
-          setName(generateRandomNameMale())
-        }
-        else if (randGender === "female")
-        {
-          console.log("running fem")
-          setName(generateRandomNameFemale())
-        }
-        else 
-        {
-          console.log("running nb")
-          setName(generateRandomNameNonBinary())
-        }
-      }
+      genderVar = selectRandomGender()
     }
 
-    if (name === "") //gender is present, name is not
+    if (name === "")
     {
-    console.log("current gender is ",)
-      if (gender === "male")
-      {
-        console.log("running man")
-        setName(generateRandomNameMale())
-      }
-      else if (gender === "female")
-      {
-        console.log("running fem")
-        setName(generateRandomNameFemale())
-      }
-      else if (gender === "non binary")
-      {
-        console.log("running nb")
-        setName(generateRandomNameNonBinary())
+      switch (genderVar) {
+        case "male":
+          nameVar = generateRandomNameMale()
+          break
+        case "female":
+          nameVar = generateRandomNameFemale()
+          break
+        case "non-binary":
+          nameVar = generateRandomNameNonBinary()
+          break
+        default:
+          nameVar = "Something went wrong during namegen."
       }
     }
 
-    if (trait === "") 
+    if (trait === "")
     {
-      setTrait("no trait")
-    }
-    setSubmit(true)
+      traitVar = "none"
     }
 
-    await generateCharacter()
+    setCharacterCreateCallback(nameVar, genderVar, traitVar)
+
+    nav("/game")
   }
 
-  useEffect(() => {
-    if (submit == true )
-    {
-      setCharacterCreateCallback(name, gender, trait)   //This is, frankly, a pretty poor way of doing this, but this was the solution I came to after 1h30m of wrestling with async. 
-      nav("/game")                                      //Gonna revisit this, hopefully in a day or two, once I brush up on how async, setState and useEffect all actually mesh with each other.
-    }
-  }, [submit])
+
 
   return (
     <div className='flex justify-center items-center my-10 text-xl'>
