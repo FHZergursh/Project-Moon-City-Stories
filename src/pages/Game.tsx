@@ -1,29 +1,37 @@
-import type { characterCreate } from '../types/characterCreate'
+import { useState } from 'react'
+import Sidebar from '../components/Sidebar'
+import { type CharacterCreate, type Character } from '../types/CharacterCreate'
 
 type GameProps = {
-  characterCreate: characterCreate
+  CharacterCreate: CharacterCreate
   
 
 }
 
-const Game = ({characterCreate} : GameProps) => {
+
+const Game = ({CharacterCreate} : GameProps) => {
+  const [character, setCharacter] = useState<Character>({name: CharacterCreate.name, gender: CharacterCreate.gender, attributes: ["Trait should be here", "Second attribute"], age: 0, ageRange: "Baby", faction: "none", uniqueRoute: "none"})
+
+
   return (
+    
     <div className='flex flex-col gap-20'>
       <div>
         <div>
-          <div>sidebar, left of screen</div>
+          <Sidebar character={character} />
         </div>
 
         <div>main content, right of screen
-          <div>text scroll</div>
-          <div>section for next and choices</div>
+          
         </div>
       </div>
 
       <div className='flex flex-col gap-2'>
-        <div>Name is {characterCreate.name}</div>
-        <div>Gender is {characterCreate.gender}</div>
-        <div>Trait is {characterCreate.trait}</div>
+        <div>Name is {CharacterCreate.name}</div>
+        <div>Gender is {CharacterCreate.gender}</div>
+        <div>Trait is {CharacterCreate.trait}</div>
+
+        <div>character generated is {character.name}</div>
       </div>
 
     </div>
