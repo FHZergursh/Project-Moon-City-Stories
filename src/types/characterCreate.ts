@@ -12,7 +12,24 @@ export type Character = {
   age: number,
   ageRange: string,
   faction: string,
-  uniqueRoute: string //used for questlines and unique starts that don't fall under the player's faction
+  rank: string,
+  uniqueRoute: string, //used for questlines and unique starts that don't fall under the player's faction
+
+  health: number,
+  sanity: number,
+  ahn: number, //money
+  combatSkill: number,
+  technicalSkill: number,
+  charismaSkill: number,
+  reputation: number, //higher is better
+
+
+
+  
+
+
+
+
 
 
 

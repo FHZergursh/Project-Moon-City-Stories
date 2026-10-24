@@ -6,17 +6,17 @@ export function selectRandomGender() {
 
   if (rand <= 47) //47% chance
   {
-    return "male"
+    return "Male"
 
   }
   else if (rand <= 94) //47% chance
   {
-    return "female"
+    return "Female"
 
   }
   else //6% chance
   {
-    return "non-binary"
+    return "Non-binary"
 
   }
 
