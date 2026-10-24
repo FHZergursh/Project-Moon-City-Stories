@@ -10,7 +10,9 @@ type GameProps = {
 
 
 const Game = ({CharacterCreate} : GameProps) => {
-  const [character, setCharacter] = useState<Character>({name: CharacterCreate.name, gender: CharacterCreate.gender, attributes: ["Trait should be here", "Second attribute"], age: 0, ageRange: "Baby", faction: "none", uniqueRoute: "none"})
+  const [character, setCharacter] = useState<Character>({name: CharacterCreate.name, gender: CharacterCreate.gender, 
+  attributes: ["Trait should be here", "Second attribute"], age: 0, ageRange: "Baby", faction: "none", rank: "none", uniqueRoute: "none",
+  health: 100, sanity: 100, ahn: 0, combatSkill: 0, technicalSkill: 0, charismaSkill: 0, reputation: 0})
 
 
   return (

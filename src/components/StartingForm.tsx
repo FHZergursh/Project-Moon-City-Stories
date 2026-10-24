@@ -29,13 +29,13 @@ const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
     if (name === "")
     {
       switch (genderVar) {
-        case "male":
+        case "Male":
           nameVar = generateRandomNameMale()
           break
-        case "female":
+        case "Female":
           nameVar = generateRandomNameFemale()
           break
-        case "non-binary":
+        case "Non-binary":
           nameVar = generateRandomNameNonBinary()
           break
         default:
@@ -68,13 +68,13 @@ const StartingForm = ({setCharacterCreateCallback} : formProps ) => {
 
         <p className='flex flex-col justify-start items-start'>Gender:
           <label>
-            Male <input type='radio' name='gender' onClick={() => setGender("male")}/>
+            Male <input type='radio' name='gender' onClick={() => setGender("Male")}/>
           </label>
           <label>
-            Female <input type='radio' name='gender'  onClick={() => setGender("female")}/>
+            Female <input type='radio' name='gender'  onClick={() => setGender("Female")}/>
           </label>
           <label>
-            Non binary <input type='radio' name='gender' onClick={() => setGender("non binary")} />
+            Non binary <input type='radio' name='gender' onClick={() => setGender("Non-binary")} />
           </label>
         </p>
 
