@@ -9,8 +9,8 @@ export type Character = {
   name: string,
   gender: string,
   attributes: string[], //basically, list of passives that confer bonuses. Trait is included here
-  age: number,
-  ageRange: string,
+  age: number, 
+  ageRange: "Baby" | "Child" | "Teenager" | "Adult" | "Old" | "Bloodfiend",
   faction: string,
   rank: string,
   uniqueRoute: string, //used for questlines and unique starts that don't fall under the player's faction

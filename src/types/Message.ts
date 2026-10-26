@@ -6,6 +6,7 @@ export type Choice = {
 }
 
 export type Message = {
+  messageNumber: number, //starts at 1, increments
   type: "ambience" | "choice" | "faction-membership" | "warning",
   title: string, 
   content: string, 

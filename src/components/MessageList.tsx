@@ -7,7 +7,20 @@ type MessageListProps = {
 
 const MessageList = ({messages} : MessageListProps) => {
   return (
-    <div>MessageList</div>
+    <div>
+      <div className='mb-10'>Messaages below here</div>
+      {messages.map((index) => (
+        <div key={index.messageNumber}>
+          <h1>{index.title}</h1>
+          <h2>{index.content}</h2>
+        </div>
+      ))}
+
+
+
+      
+
+    </div>
   )
 }
 
