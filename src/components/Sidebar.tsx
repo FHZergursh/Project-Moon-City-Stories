@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Character } from '../types/CharacterCreate'
+import type { Character } from '../types/CharacterCreate.ts'
 
 type SidebarProps = {
   character: Character

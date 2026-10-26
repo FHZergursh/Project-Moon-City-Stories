@@ -14,6 +14,7 @@ export type Character = {
   faction: string,
   rank: string,
   uniqueRoute: string, //used for questlines and unique starts that don't fall under the player's faction
+  achievements: string[], //displayed on results page
 
   health: number,
   sanity: number,
