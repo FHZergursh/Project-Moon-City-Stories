@@ -1,5 +1,6 @@
 import React from 'react'
-import type { Character } from '../types/CharacterCreate.ts'
+import type { Character } from '../types/characterCreate'
+
 
 type SidebarProps = {
   character: Character
@@ -8,7 +9,7 @@ type SidebarProps = {
 
 const Sidebar = ({character} : SidebarProps) => {
   return (
-    <div>Test of sidebar, character name is {character.name}</div>
+    <div className=''>Test of sidebar, character name is {character.name}</div>
   )
 }
 
