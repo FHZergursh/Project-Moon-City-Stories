@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar'
 import { type CharacterCreate, type Character } from '../types/characterCreate'
 import type { Message } from '../types/Message'
 import MessageList from '../components/MessageList'
+import { checkAgeRange } from '../functions/checkAgeRange'
 
 type GameProps = {
   CharacterCreate: CharacterCreate
@@ -17,20 +18,32 @@ const Game = ({CharacterCreate} : GameProps) => {
 
   const [messages, setMessages] = useState<Message[]>([{messageNumber: 1, type: 'ambience', title: "A starting message", content: "lorem ipsum stuff just padding out to test UI"}])
   const [messageCount, setMessageCount] = useState(1) 
-  const [timeMonths, setTimeMonths] = useState(0) //probably gonna want more precision that just the Character's age later on, but don't need it right now
+  const [timeMonths, setTimeMonths] = useState(0)
   const [startingLocation, setStartingLocation] = useState("H corp") //make this random when you get around to implementing starting position differences
+
 
   function handleClick(e : React.MouseEvent) {
     e.preventDefault()
-    console.log(e)
-
     advanceTime()
   } 
 
 
 
-  function advanceTime() { //move this to its own file when it makes sense to, for now its better that it remains here
+  function advanceTime() { 
     console.log("Button test successful")
+
+    const age = ageCharacter()
+
+    if (age !== character.age || character.ageRange !== "Bloodfiend")
+    {
+      const ageRange = checkAgeRange(age)
+      setCharacter({...character, age: age, ageRange: ageRange })
+    }
+    else {
+      setCharacter({...character, age: age})
+    }
+
+
 
     const messageNumber = messageCount + 1
     console.log(messageNumber)
@@ -45,8 +58,26 @@ const Game = ({CharacterCreate} : GameProps) => {
     const insert : Message = {messageNumber: messageNumber, type: type, title: title, content: content}
     const newMessages = [...messages, insert]
     setMessages(newMessages)
+  }
 
+  function ageCharacter() { 
 
+    const rand = Math.floor(Math.random() * 12) + 1
+    let newAge = character.age
+    let timeEclipsed = rand + timeMonths
+
+    console.log("Current time eclipsed is " + timeEclipsed)
+
+    if (timeEclipsed > 12) { //next year
+      console.log("Proceeding to next year")
+      timeEclipsed = timeEclipsed - 12
+      newAge = character.age + 1
+
+    }
+    setTimeMonths(timeEclipsed)
+
+    console.log("ageCharacter is done running, setting month " + (timeEclipsed - 12 + " and new age of " + newAge)) //testing log, remove later in dev
+    return newAge
   }
 
   return (
@@ -58,6 +89,8 @@ const Game = ({CharacterCreate} : GameProps) => {
         <MessageList messages={messages}/>
         <button onClick={(e) => handleClick(e)}>Advance time...</button>
       </div>
+      <h1>Age in months is {timeMonths}</h1>
+      <h1>Age in years is {character.age}</h1>
     </div>
     
   )
