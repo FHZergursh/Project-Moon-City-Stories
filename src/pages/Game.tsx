@@ -4,6 +4,7 @@ import { type CharacterCreate, type Character } from '../types/characterCreate'
 import type { Message } from '../types/Message'
 import MessageList from '../components/MessageList'
 import { checkAgeRange } from '../functions/checkAgeRange'
+import { generateMessage } from '../functions/messages/generateMessage'
 
 type GameProps = {
   CharacterCreate: CharacterCreate
@@ -20,6 +21,8 @@ const Game = ({CharacterCreate} : GameProps) => {
   const [messageCount, setMessageCount] = useState(1) 
   const [timeMonths, setTimeMonths] = useState(0)
   const [startingLocation, setStartingLocation] = useState("H corp") //make this random when you get around to implementing starting position differences
+  const [factionCooldown, setFactionCooldown] = useState(0) 
+  const [choiceCooldown, setChoiceCooldown] = useState(0)
 
 
   function handleClick(e : React.MouseEvent) {
@@ -32,31 +35,42 @@ const Game = ({CharacterCreate} : GameProps) => {
   function advanceTime() { 
     console.log("Button test successful")
 
+    //age
     const age = ageCharacter()
-
+    let ageRange = character.ageRange
     if (age !== character.age || character.ageRange !== "Bloodfiend")
     {
-      const ageRange = checkAgeRange(age)
+      ageRange = checkAgeRange(age)
       setCharacter({...character, age: age, ageRange: ageRange })
     }
     else {
       setCharacter({...character, age: age})
     }
 
-
-
     const messageNumber = messageCount + 1
     console.log(messageNumber)
     setMessageCount(messageNumber)
 
+    //cooldowns
+    let factionCd = factionCooldown
+    let choiceCd = choiceCooldown
+    if (factionCooldown !== 0)
+    {
+      factionCd = factionCd - 1
+      setFactionCooldown(factionCd)
+    }
 
-    //hardcoded for testing purposes
-    const type = "ambience"
-    const title = "Test submit"
-    const content = "Added new message via advanceTime"
+    if (choiceCd !== 0)
+    {
+      choiceCd = choiceCd - 1 
+      setChoiceCooldown(choiceCd)
+    }
 
-    const insert : Message = {messageNumber: messageNumber, type: type, title: title, content: content}
-    const newMessages = [...messages, insert]
+    //new message generation
+    console.log("Attempting generation")
+    const newMessage : Message = generateMessage({messageCount: messageNumber, ageRange: ageRange, faction: character.faction, rank: character.rank, startingLocation: startingLocation, factionCd: factionCd, choiceCd: choiceCd})
+
+    const newMessages = [...messages, newMessage]
     setMessages(newMessages)
   }
 
