@@ -4,18 +4,34 @@ import type { Message } from "../../../types/Message"
 
 
 
-export function ambienceGlobal() { 
-  console.log("Function")
-}
-
-
-export function ambienceBaby(messageNumber : number ) {
+export function ambienceGlobal(messageNumber : number) { 
   const type = "ambience"
   const optionCount = 1 //upper bounds of random
   console.log("Start of ambienceBaby")
   
   const randomGen = optionCount //for now hardcoded but it'll be random when I need it to be 
   if (randomGen === 1) //also probably wants to be a switch statement later
+  {
+    const title = "Global!"
+    const content = "Any faction ideally should also call from this method"
+    const message : Message = {messageNumber, type, title, content}
+    return message
+  }
+
+
+  const error : Message = {messageNumber, type: "ambience", title: "Error", content: "Failure in ambienceBaby()" }
+  console.log("Finished with the ambience")
+  return error
+}
+
+
+export function ambienceBaby(messageNumber : number ) {
+  const type = "ambience"
+  const optionCount = 1 
+  console.log("Start of ambienceBaby")
+  
+  const randomGen = optionCount 
+  if (randomGen === 1) 
   {
     const title = "The first ambience message!"
     const content = "Has generated successfully!"
