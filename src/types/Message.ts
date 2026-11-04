@@ -1,7 +1,18 @@
 export type Choice = {
   description: string,
-  aftermathDescription: string,
-  result: string //rewards and punishments, stat changes, ect....
+  aftermath: string,
+  result: Result //rewards and punishments, stat changes, ect....
+
+}
+
+export type Result = {
+  positive: boolean, //false for negative result, obviously
+  combatSkillChange?: number,
+  technicalSkillChange?: number,
+  charismaSkillChange?: number,
+  addAttribute?: string,
+  removeAttribute?: string
+
 
 }
 
